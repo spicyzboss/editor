@@ -10,9 +10,9 @@ return {
 
     local width = 27
     local height = 15 -- two pixels per vertical space
-    dashboard.section.terminal.command = "cat | "
-      .. os.getenv("HOME")
-      .. "/.config/fish/functions/art/thisisfine.sh"
+    -- dashboard.section.terminal.command = "cat | "
+    --   .. os.getenv("HOME")
+    --   .. "/.config/fish/functions/art/thisisfine.sh"
 
     dashboard.section.terminal.width = width
     dashboard.section.terminal.height = height

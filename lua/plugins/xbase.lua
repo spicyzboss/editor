@@ -1,6 +1,7 @@
 return {
   "xbase-lab/xbase",
   build = "make install", -- or "make install && make free_space" (not recommended, longer build time)
+  enabled = false,
   dependencies = {
     "neovim/nvim-lspconfig",
     "nvim-telescope/telescope.nvim",

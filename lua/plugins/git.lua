@@ -17,4 +17,10 @@ return {
     { "]g", "<cmd>Gitsigns next_hunk<CR>", desc = "Next Git Hunk" },
     { "[g", "<cmd>Gitsigns prev_hunk<CR>", desc = "Previous Git Hunk" },
   },
+  {
+    "akinsho/git-conflict.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    version = "*",
+    config = true,
+  },
 }

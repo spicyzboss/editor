@@ -12,32 +12,6 @@ return {
     },
     opts = {
       servers = {
-        tsserver = {
-          settings = {
-            typescript = {
-              inlayHints = {
-                includeInlayParameterNameHints = "literal",
-                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                includeInlayFunctionParameterTypeHints = false,
-                includeInlayVariableTypeHints = false,
-                includeInlayPropertyDeclarationTypeHints = false,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
-              },
-            },
-            javascript = {
-              inlayHints = {
-                includeInlayParameterNameHints = "all",
-                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayVariableTypeHints = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
-              },
-            },
-          },
-        },
         lua_ls = {
           settings = { Lua = { diagnostics = { globals = { "vim" } } } },
         },
@@ -226,7 +200,7 @@ return {
   {
     "hrsh7th/nvim-cmp",
     version = false,
-    event = { "InsertEnter", "CmdlineEnter" },
+    event = { "BufReadPre", "BufNewFile", "CmdlineEnter" },
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
@@ -281,6 +255,7 @@ return {
           { name = "buffer", priority = 10, keyword_length = 3 },
           { name = "path", priority = 2 },
           { name = "fish" },
+          { name = 'orgmode' },
           { name = "calc" },
           { name = "crates" },
           { name = "nerdfont" },
@@ -360,8 +335,6 @@ return {
           null_ls.builtins.formatting.stylua,
           null_ls.builtins.formatting.prettierd,
           null_ls.builtins.formatting.fixjson,
-          null_ls.builtins.diagnostics.eslint_d,
-          null_ls.builtins.code_actions.eslint_d,
           null_ls.builtins.formatting.rustfmt,
           null_ls.builtins.formatting.gofmt,
           -- null_ls.builtins.formatting.prismaFmt,
@@ -402,8 +375,8 @@ return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
-    config = function()
-      require("copilot").setup({})
+    config = function(_, opts)
+      require("copilot").setup(opts)
     end,
     opts = {
       filetypes = {

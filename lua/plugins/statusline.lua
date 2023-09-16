@@ -40,23 +40,18 @@ return {
               unnamed = "",
             },
           },
-          -- {
-          --   "diagnostics",
-          --   sources = { "nvim_lsp" },
-          --   symbols = { error = " ", warn = " ", info = " " },
-          -- },
         },
         lualine_x = {
-          "encoding",
+          function()
+            return require("lsp-status").status()
+          end,
           "filetype",
-          function ()
-            return require('lsp-status').status()
-          end
+          "location",
         },
         lualine_y = { "progress" },
         lualine_z = {
           function()
-            return " " .. os.date("%X")
+            return os.date("%X")
           end,
         },
       },

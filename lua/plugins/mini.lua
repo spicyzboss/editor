@@ -15,9 +15,10 @@ return {
       { "JoosepAlviste/nvim-ts-context-commentstring" },
     },
     opts = {
-      hooks = {
-        pre = function()
-          require("ts_context_commentstring.internal").update_commentstring({})
+      options = {
+        custom_commentstring = function()
+          return require("ts_context_commentstring.internal").calculate_commentstring()
+            or vim.bo.commentstring
         end,
       },
     },
@@ -39,11 +40,32 @@ return {
         highlight = "gsh", -- Highlight surrounding
         update_n_lines = "gsn", -- Update `n_lines`
       },
+      n_lines = 100,
     },
     config = function(_, opts)
       -- use gz mappings instead of s to prevent conflict with leap
       require("mini.surround").setup(opts)
     end,
   },
+  {
+    "echasnovski/mini.animate",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function(_, opts)
+      require("mini.animate").setup(opts)
+    end,
+  },
+  {
+    "echasnovski/mini.move",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function(_, opts)
+      require("mini.move").setup(opts)
+    end,
+  },
+  {
+    "echasnovski/mini.jump2d",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function(_, opts)
+      require("mini.jump2d").setup(opts)
+    end,
+  },
 }
-
